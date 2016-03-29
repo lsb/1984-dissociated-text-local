@@ -1,0 +1,2 @@
+#!/bin/sh
+tr 'A-Za-z' 'N-ZA-Mn-za-m' | awk '/./ ; /^[[:space:]]*$/ { print "~" }' | sed -e "s/[[:space:]]/\n/g" -e "s/[[:punct:]]/\n&\n/g" -e "s/'/''/g" | grep . | awk -v delim="'" 'BEGIN { print("begin;drop table if exists words;create table words (id integer primary key, word text);") } { print "insert into words (word) values (" delim $0 delim ");"}; END { print "create index w on words(word);commit;"}'
