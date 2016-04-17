@@ -1,0 +1,2 @@
+#!/bin/sh
+echo ; sqlite3 /app/db < /app/sql | tr "\n" " " | tr "~" "\n" ; echo
